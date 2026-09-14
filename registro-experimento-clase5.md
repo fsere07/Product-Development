@@ -6,6 +6,7 @@
 - Criterio de éxito: < 5 min de configuración y ≥ 4/6 correctas.
 
 ## Piloto (Paso 7 — 1 a 2 usuarios internos)
+- Link del instrumento: https://claude.ai/artifact/BgiCS7w4zdCwdKsu2UNAfH (ver [reclutamiento.md](reclutamiento.md))
 - _PENDIENTE — correr primero con 1-2 personas del equipo para detectar errores técnicos, escenarios confusos o mediciones que no se registran bien, antes de correr con los 5 participantes reales._
 
 ## Ejecución (Paso 8)

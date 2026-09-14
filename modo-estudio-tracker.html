@@ -185,8 +185,9 @@ async function finishSession(sustainedClicked){
     sustained
   };
   try{
-    await window.storage.set('session:'+Date.now()+':'+state.participant, JSON.stringify(record), true);
-  }catch(e){ console.error('storage error', e); }
+    const db = window.claude && window.claude.use ? await window.claude.use('db') : null;
+    if(db) await db.collection('sessions').add(record);
+  }catch(e){ console.error('db error', e); }
 
   const el = document.getElementById('view-session');
   el.innerHTML = `
@@ -210,21 +211,16 @@ function resetSession(){
 async function renderResults(){
   const el = document.getElementById('view-results');
   el.innerHTML = '<div class="loading">Cargando sesiones…</div>';
-  let keys = [];
+  const db = window.claude && window.claude.use ? await window.claude.use('db') : null;
+  if(!db){ el.innerHTML = '<div class="empty">Este panel necesita abrirse desde el link publicado para ver los datos guardados.</div>'; return; }
+
+  let records = [];
   try{
-    const res = await window.storage.list('session:', true);
-    keys = res ? res.keys : [];
+    const snap = await db.collection('sessions').get();
+    records = snap.docs.map(d=>d.data());
   }catch(e){ el.innerHTML = '<div class="empty">No se pudieron cargar los datos.</div>'; return; }
 
-  if(!keys.length){ el.innerHTML = '<div class="card"><div class="empty">Todavía no hay sesiones registradas.</div></div>'; return; }
-
-  const records = [];
-  for(const k of keys){
-    try{
-      const r = await window.storage.get(k, true);
-      if(r) records.push(JSON.parse(r.value));
-    }catch(e){}
-  }
+  if(!records.length){ el.innerHTML = '<div class="card"><div class="empty">Todavía no hay sesiones registradas.</div></div>'; return; }
 
   const total = records.length;
   const sustainedCount = records.filter(r=>r.sustained).length;

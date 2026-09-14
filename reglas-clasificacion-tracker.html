@@ -97,7 +97,10 @@ async function abandon(){
   const pid = document.getElementById('pid').value.trim() || '(sin código)';
   const elapsed = Math.round((Date.now()-state.ruleStart)/1000);
   const record = { participant: pid, date: new Date().toISOString().slice(0,10), configSec: elapsed, abandoned: true };
-  try{ await window.storage.set('reglas:'+Date.now()+':'+pid, JSON.stringify(record), true); }catch(e){}
+  try{
+    const db = window.claude && window.claude.use ? await window.claude.use('db') : null;
+    if(db) await db.collection('reglas').add(record);
+  }catch(e){}
   document.getElementById('view-run').innerHTML = `<div class="result-banner no">Registrado como abandono en la configuración.</div>`;
 }
 
@@ -142,7 +145,10 @@ async function answer(choice){
       configSec: state.configSec, abandoned: false,
       correctCount, total: SCENARIOS.length, answers: state.answers
     };
-    try{ await window.storage.set('reglas:'+Date.now()+':'+state.participant, JSON.stringify(record), true); }catch(e){}
+    try{
+      const db = window.claude && window.claude.use ? await window.claude.use('db') : null;
+      if(db) await db.collection('reglas').add(record);
+    }catch(e){}
     const success = state.configSec < 300 && correctCount >= 4;
     document.getElementById('view-run').innerHTML = `
       <div class="result-banner ${success?'ok':'no'}">
@@ -160,15 +166,15 @@ async function answer(choice){
 async function renderResults(){
   const el = document.getElementById('view-results');
   el.innerHTML = '<div class="empty">Cargando…</div>';
-  let keys = [];
-  try{ const res = await window.storage.list('reglas:', true); keys = res ? res.keys : []; }
-  catch(e){ el.innerHTML = '<div class="empty">No se pudieron cargar los datos.</div>'; return; }
-  if(!keys.length){ el.innerHTML = '<div class="card"><div class="empty">Todavía no hay sesiones registradas.</div></div>'; return; }
+  const db = window.claude && window.claude.use ? await window.claude.use('db') : null;
+  if(!db){ el.innerHTML = '<div class="empty">Este panel necesita abrirse desde el link publicado para ver los datos guardados.</div>'; return; }
 
-  const records = [];
-  for(const k of keys){
-    try{ const r = await window.storage.get(k, true); if(r) records.push(JSON.parse(r.value)); }catch(e){}
-  }
+  let records = [];
+  try{
+    const snap = await db.collection('reglas').get();
+    records = snap.docs.map(d=>d.data());
+  }catch(e){ el.innerHTML = '<div class="empty">No se pudieron cargar los datos.</div>'; return; }
+  if(!records.length){ el.innerHTML = '<div class="card"><div class="empty">Todavía no hay sesiones registradas.</div></div>'; return; }
   const completed = records.filter(r=>!r.abandoned);
   const abandoned = records.filter(r=>r.abandoned);
   const succeeded = completed.filter(r=> r.configSec < 300 && r.correctCount >= 4);

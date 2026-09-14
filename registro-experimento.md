@@ -21,6 +21,7 @@
   - Autorreporte al final: "sostuvo el bloque" o "se distrajo con una app bloqueada".
   - Panel de resultados con el % de sesiones sostenidas por participante y total, comparado contra el criterio de éxito (40%).
 - Qué quedó fuera: cualquier bloqueo real de apps a nivel sistema operativo, notificaciones push, y clasificación automática de contenido — no correspondía en esta etapa.
+- **Link publicado (con almacenamiento compartido activo):** https://claude.ai/artifact/1nVzFAtkuLUiHGcThD1ecW — ver [reclutamiento.md](reclutamiento.md) para el mensaje de invitación a los 8-10 participantes.
 
 ## 4. Ejecución
 - Fecha y contexto: _PENDIENTE — completar durante las 2 semanas de prueba real con los 8-10 participantes._

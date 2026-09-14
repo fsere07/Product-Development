@@ -45,3 +45,5 @@ Sesión combinada de configuración + clasificación:
 
 ## Instrumento funcional
 `reglas-clasificacion-tracker.html` — web app que guía la configuración de reglas y la clasificación de los 6 escenarios, y guarda cada sesión en almacenamiento compartido para ver los resultados agregados en la pestaña "Resultados".
+
+**Link para correr el experimento:** https://claude.ai/artifact/BgiCS7w4zdCwdKsu2UNAfH — ver [reclutamiento.md](reclutamiento.md) para el mensaje de invitación y el orden piloto → participantes reales.

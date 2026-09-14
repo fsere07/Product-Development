@@ -372,13 +372,15 @@ Guion de 9 preguntas, revisado para evitar sugerir respuestas, no presentar solu
 
 | Decisión | Definición del equipo |
 |---|---|
-| Perfil de entrevistados | 🔲 A definir (sugerencia: compañeros de primer año de al menos 2 carreras distintas, para no sesgar por facultad) |
+| Perfil de entrevistados | 🔲 **Propuesta de la IA, a confirmar:** compañeros de primer año de al menos 2 carreras distintas, para no sesgar por facultad |
 | Cantidad mínima | 3 personas |
-| Forma de contacto | 🔲 A definir |
-| Responsable de entrevistar | 🔲 A definir |
-| Responsable de registrar | 🔲 A definir |
+| Forma de contacto | 🔲 **Propuesta de la IA, a confirmar:** mensaje directo por WhatsApp/Instagram a compañeros de la comisión y grupos de primer año, individual (no en grupo) para que se sientan cómodos hablando de culpa/procrastinación |
+| Responsable de entrevistar | 🔲 A definir por el equipo |
+| Responsable de registrar | 🔲 A definir por el equipo |
 | Evidencia que se recopilará | Transcripción o notas de cada entrevista + frecuencia mencionada + consecuencias mencionadas |
 | Fecha límite | Antes de la Clase 3 |
+
+> Nota: esta tabla quedó parcialmente resuelta por la propia evidencia del proyecto — el [lean-product-canvas.md](lean-product-canvas.md) ya registra las 3 entrevistas reales (Martina, Franco, Camila) que este plan buscaba producir. Los campos de "responsable" siguen sin definir porque son una decisión interna del equipo que no se puede inferir del resto del repositorio.
 
 ---
 
