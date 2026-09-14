@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modo Estudio — Experimento</title>
+<style>
+  :root{
+    --bg: #12172A;
+    --surface: #1B2140;
+    --surface-2: #232B52;
+    --border: #323B66;
+    --text: #EDEDF3;
+    --text-dim: #9BA1C4;
+    --amber: #E8B04B;
+    --teal: #56D6C2;
+    --red: #E36B6B;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body{
+    margin:0; min-height:100vh; background:var(--bg); color:var(--text);
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    display:flex; justify-content:center; padding:32px 16px;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+  #app{ width:100%; max-width:480px; }
+  h1{
+    font-family:'Fraunces', serif; font-weight:600; font-size:28px;
+    margin:0 0 4px; letter-spacing:-0.01em;
+  }
+  .sub{ color:var(--text-dim); font-size:14px; margin:0 0 24px; line-height:1.5; }
+  nav{ display:flex; gap:4px; margin-bottom:20px; background:var(--surface); padding:4px; border-radius:var(--radius); border:1px solid var(--border); }
+  nav button{
+    flex:1; padding:10px; border:none; background:transparent; color:var(--text-dim);
+    font-size:14px; font-weight:500; border-radius:7px; cursor:pointer; font-family:inherit;
+  }
+  nav button.active{ background:var(--surface-2); color:var(--text); }
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px; margin-bottom:16px;
+  }
+  label{ display:block; font-size:13px; color:var(--text-dim); margin:16px 0 8px; }
+  label:first-child{ margin-top:0; }
+  select, input[type=text]{
+    width:100%; padding:11px 12px; background:var(--surface-2); border:1px solid var(--border);
+    border-radius:7px; color:var(--text); font-size:15px; font-family:inherit;
+  }
+  .apps{ display:flex; flex-wrap:wrap; gap:8px; }
+  .apps label{
+    margin:0; display:flex; align-items:center; gap:6px; background:var(--surface-2);
+    border:1px solid var(--border); padding:8px 12px; border-radius:20px; font-size:13px;
+    color:var(--text); cursor:pointer; width:auto;
+  }
+  .apps input{ accent-color:var(--amber); }
+  button.primary{
+    width:100%; padding:13px; margin-top:20px; background:var(--amber); color:#14172A;
+    border:none; border-radius:7px; font-size:15px; font-weight:600; cursor:pointer; font-family:inherit;
+  }
+  button.primary:disabled{ opacity:0.4; cursor:not-allowed; }
+  button.danger{
+    width:100%; padding:13px; margin-top:10px; background:transparent; color:var(--red);
+    border:1px solid var(--red); border-radius:7px; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit;
+  }
+  .timer{
+    text-align:center; font-family:'Fraunces', serif; font-size:52px; font-weight:500;
+    margin:20px 0 4px; font-variant-numeric: tabular-nums;
+  }
+  .timer-label{ text-align:center; color:var(--text-dim); font-size:13px; margin-bottom:8px; }
+  .blocked-tags{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:14px 0; }
+  .tag{ background:var(--surface-2); border:1px solid var(--border); padding:4px 10px; border-radius:14px; font-size:12px; color:var(--text-dim); }
+  .result-banner{
+    text-align:center; padding:16px; border-radius:var(--radius); margin-bottom:16px; font-weight:600; font-size:15px;
+  }
+  .result-banner.ok{ background:rgba(86,214,194,0.12); color:var(--teal); border:1px solid rgba(86,214,194,0.35); }
+  .result-banner.no{ background:rgba(227,107,107,0.12); color:var(--red); border:1px solid rgba(227,107,107,0.35); }
+  .stat-row{ display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--border); font-size:14px; }
+  .stat-row:last-child{ border-bottom:none; }
+  .stat-row .n{ font-weight:600; color:var(--amber); }
+  table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+  th{ text-align:left; color:var(--text-dim); font-weight:500; padding:6px 4px; border-bottom:1px solid var(--border); }
+  td{ padding:7px 4px; border-bottom:1px solid var(--border); }
+  .empty{ color:var(--text-dim); font-size:14px; text-align:center; padding:20px 0; }
+  .loading{ color:var(--text-dim); font-size:13px; text-align:center; padding:10px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <h1>Modo Estudio</h1>
+  <p class="sub">Instrumento del experimento — declarás qué apps vas a bloquear, estudiás el bloque y registrás si lo sostuviste. Sin IA real: la clasificación la hacés vos.</p>
+
+  <nav>
+    <button id="tab-session" class="active" onclick="showTab('session')">Nueva sesión</button>
+    <button id="tab-results" onclick="showTab('results')">Resultados</button>
+  </nav>
+
+  <div id="view-session"></div>
+  <div id="view-results" style="display:none"></div>
+</div>
+
+<script>
+const APPS = ["Instagram","TikTok","YouTube","X / Twitter","Otro"];
+let state = { step: "setup", participant: "", blocked: [], planned: 25, startTs: null, timerInt: null };
+
+function showTab(tab){
+  document.getElementById('tab-session').classList.toggle('active', tab==='session');
+  document.getElementById('tab-results').classList.toggle('active', tab==='results');
+  document.getElementById('view-session').style.display = tab==='session' ? 'block' : 'none';
+  document.getElementById('view-results').style.display = tab==='results' ? 'block' : 'none';
+  if(tab==='results') renderResults();
+}
+
+function renderSetup(){
+  const el = document.getElementById('view-session');
+  el.innerHTML = `
+    <div class="card">
+      <label>Código de participante</label>
+      <input type="text" id="pid" placeholder="ej: E4" value="${state.participant}">
+
+      <label>Apps a bloquear en este bloque</label>
+      <div class="apps">
+        ${APPS.map(a => `
+          <label><input type="checkbox" value="${a}" ${state.blocked.includes(a)?'checked':''} onchange="toggleApp('${a}')"> ${a}</label>
+        `).join('')}
+      </div>
+
+      <label>Duración planeada</label>
+      <select id="planned" onchange="state.planned=parseInt(this.value)">
+        <option value="25" ${state.planned==25?'selected':''}>25 min</option>
+        <option value="45" ${state.planned==45?'selected':''}>45 min</option>
+        <option value="60" ${state.planned==60?'selected':''}>60 min</option>
+      </select>
+
+      <button class="primary" onclick="startSession()">Activar modo estudio</button>
+    </div>
+  `;
+}
+
+function toggleApp(a){
+  const i = state.blocked.indexOf(a);
+  if(i>-1) state.blocked.splice(i,1); else state.blocked.push(a);
+}
+
+function startSession(){
+  state.participant = document.getElementById('pid').value.trim();
+  if(!state.participant){ alert('Poné tu código de participante.'); return; }
+  if(state.blocked.length===0){ alert('Elegí al menos una app para bloquear.'); return; }
+  state.step = 'running';
+  state.startTs = Date.now();
+  renderRunning();
+  state.timerInt = setInterval(updateTimer, 1000);
+}
+
+function renderRunning(){
+  const el = document.getElementById('view-session');
+  el.innerHTML = `
+    <div class="card">
+      <div class="timer-label">Bloque de ${state.planned} min · ${state.participant}</div>
+      <div class="timer" id="clock">00:00</div>
+      <div class="blocked-tags">${state.blocked.map(a=>`<span class="tag">${a} bloqueada</span>`).join('')}</div>
+      <button class="primary" onclick="finishSession(true)">Terminé sosteniendo el bloque</button>
+      <button class="danger" onclick="finishSession(false)">Me distraje con una app bloqueada</button>
+    </div>
+  `;
+}
+
+function updateTimer(){
+  const elapsed = Math.floor((Date.now()-state.startTs)/1000);
+  const m = String(Math.floor(elapsed/60)).padStart(2,'0');
+  const s = String(elapsed%60).padStart(2,'0');
+  const clockEl = document.getElementById('clock');
+  if(clockEl) clockEl.textContent = `${m}:${s}`;
+}
+
+async function finishSession(sustainedClicked){
+  clearInterval(state.timerInt);
+  const elapsedSec = Math.floor((Date.now()-state.startTs)/1000);
+  const sustained = sustainedClicked && elapsedSec >= state.planned*60 * 0.9; // tolerancia 10%
+  const record = {
+    participant: state.participant,
+    date: new Date().toISOString().slice(0,10),
+    blocked: state.blocked,
+    plannedMin: state.planned,
+    actualSec: elapsedSec,
+    sustained
+  };
+  try{
+    await window.storage.set('session:'+Date.now()+':'+state.participant, JSON.stringify(record), true);
+  }catch(e){ console.error('storage error', e); }
+
+  const el = document.getElementById('view-session');
+  el.innerHTML = `
+    <div class="result-banner ${sustained?'ok':'no'}">
+      ${sustained ? 'Sesión registrada — sostuviste el bloque ✓' : 'Sesión registrada — no se sostuvo el bloque'}
+    </div>
+    <div class="card">
+      <div class="stat-row"><span>Participante</span><span class="n">${record.participant}</span></div>
+      <div class="stat-row"><span>Duración real</span><span class="n">${Math.floor(elapsedSec/60)} min</span></div>
+      <div class="stat-row"><span>Planeado</span><span class="n">${record.plannedMin} min</span></div>
+      <button class="primary" onclick="resetSession()">Registrar otra sesión</button>
+    </div>
+  `;
+}
+
+function resetSession(){
+  state = { step:"setup", participant: state.participant, blocked: [], planned: 25, startTs: null, timerInt: null };
+  renderSetup();
+}
+
+async function renderResults(){
+  const el = document.getElementById('view-results');
+  el.innerHTML = '<div class="loading">Cargando sesiones…</div>';
+  let keys = [];
+  try{
+    const res = await window.storage.list('session:', true);
+    keys = res ? res.keys : [];
+  }catch(e){ el.innerHTML = '<div class="empty">No se pudieron cargar los datos.</div>'; return; }
+
+  if(!keys.length){ el.innerHTML = '<div class="card"><div class="empty">Todavía no hay sesiones registradas.</div></div>'; return; }
+
+  const records = [];
+  for(const k of keys){
+    try{
+      const r = await window.storage.get(k, true);
+      if(r) records.push(JSON.parse(r.value));
+    }catch(e){}
+  }
+
+  const total = records.length;
+  const sustainedCount = records.filter(r=>r.sustained).length;
+  const pct = total ? Math.round((sustainedCount/total)*100) : 0;
+
+  const byParticipant = {};
+  records.forEach(r=>{
+    byParticipant[r.participant] = byParticipant[r.participant] || {total:0, sustained:0};
+    byParticipant[r.participant].total++;
+    if(r.sustained) byParticipant[r.participant].sustained++;
+  });
+
+  el.innerHTML = `
+    <div class="card">
+      <div class="stat-row"><span>Sesiones totales</span><span class="n">${total}</span></div>
+      <div class="stat-row"><span>Sesiones sostenidas</span><span class="n">${sustainedCount}</span></div>
+      <div class="stat-row"><span>% activación sostenida</span><span class="n">${pct}%</span></div>
+      <div class="stat-row"><span>Criterio de éxito (canvas)</span><span class="n">&gt; 40%</span></div>
+    </div>
+    <div class="card">
+      <table>
+        <tr><th>Participante</th><th>Sesiones</th><th>Sostenidas</th><th>%</th></tr>
+        ${Object.entries(byParticipant).map(([p,d])=>`
+          <tr><td>${p}</td><td>${d.total}</td><td>${d.sustained}</td><td>${Math.round(d.sustained/d.total*100)}%</td></tr>
+        `).join('')}
+      </table>
+    </div>
+  `;
+}
+
+renderSetup();
+</script>
+</body>
+</html>
