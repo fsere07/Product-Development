@@ -2,13 +2,13 @@
 
 ## 1. Punto de partida
 - Hipótesis priorizada: **Comportamiento** — Creemos que los estudiantes de primer año activarán voluntariamente un "modo estudio" antes de estudiar.
-- Pregunta de aprendizaje: ¿Los estudiantes realmente van a activar y sostener el uso de un "modo estudio" de forma voluntaria, o va a pasar lo mismo que con la app que instaló y desinstaló Martina?
+- Pregunta de aprendizaje: ¿Los estudiantes realmente van a activar y sostener el uso de un "modo estudio" de forma voluntaria, o va a pasar lo mismo que con la app que instaló y desinstaló E1?
 - Experimento mínimo: prueba de activación con prototipo Wizard of Oz — 8 a 10 estudiantes de primer año activan el "modo estudio" antes de cada sesión de estudio durante 2 semanas y reportan si lo sostuvieron.
 - Métrica: % de sesiones de estudio declaradas donde efectivamente activaron el modo.
 - Criterio de éxito: más del 40% de sesiones con activación sostenida. Criterio de fracaso: menos del 20%, o abandono total antes de la semana 2.
 
 ## 2. Posición inicial en la curva de la verdad
-- Evidencia disponible: 3 entrevistas cualitativas (Martina, Franco, Camila) que muestran el patrón de procrastinación y culpa, pero ninguna evidencia sobre activación voluntaria de una solución.
+- Evidencia disponible: 3 entrevistas cualitativas (E1, E2, E3) que muestran el patrón de procrastinación y culpa, pero ninguna evidencia sobre activación voluntaria de una solución.
 - Incertidumbre pendiente: si la barrera es de motivación/activación (no de tecnología) — es decir, si van a *usar* la solución más allá de probarla una vez.
 - Inversión autorizada: mínima — sin desarrollo de clasificación real, sin app nativa. Solo un instrumento Wizard of Oz descartable.
 

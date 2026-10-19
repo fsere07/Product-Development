@@ -8,7 +8,7 @@ Tienen dos experimentos diseñados a partir del [lean-product-canvas.md](lean-pr
 2. **Reglas de clasificación** (Clase 5, hipótesis de factibilidad) — diseño en [diseno-experimento.md](diseno-experimento.md), registro en [registro-experimento-clase5.md](registro-experimento-clase5.md).
 
 - **Querían comprobar:**
-  - Modo estudio: si los estudiantes activan y sostienen voluntariamente un "modo estudio" Wizard of Oz durante 2 semanas, o si pasa lo mismo que con la app que Martina instaló y desinstaló.
+  - Modo estudio: si los estudiantes activan y sostienen voluntariamente un "modo estudio" Wizard of Oz durante 2 semanas, o si pasa lo mismo que con la app que E1 instaló y desinstaló.
   - Reglas de clasificación: si un estudiante puede definir sus propias reglas de "ocio vs. académico" y aplicarlas de forma consistente ante contenido ambiguo, sin IA clasificando.
 - **El criterio era:**
   - Modo estudio: más del 40% de sesiones con activación sostenida (fracaso: menos del 20%, o abandono total antes de la semana 2).

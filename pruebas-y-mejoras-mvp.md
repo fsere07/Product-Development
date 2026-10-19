@@ -7,7 +7,7 @@
 - **Equipo:** Juan José y equipo (completar integrantes).
 - **Fecha:** 2026-10-19
 - **Usuario:** estudiante de primer año.
-- **Problema:** posterga tareas académicas porque abre redes sociales cuando se sienta a estudiar, y pierde el bloque sin darse cuenta (3 entrevistas: Martina, Franco, Camila — ver [lean-product-canvas.md](lean-product-canvas.md)).
+- **Problema:** posterga tareas académicas porque abre redes sociales cuando se sienta a estudiar, y pierde el bloque sin darse cuenta (3 entrevistas: E1, E2, E3 — ver [lean-product-canvas.md](lean-product-canvas.md)).
 - **Acceso al MVP (versión inicial, v1):** https://claude.ai/artifact/MJyhJh9PeUUC7Eg1ZdeA4o — pendiente: activar Share para que otros puedan abrirlo. Detalle en [mvp.md](mvp.md).
 
 ### Reconstrucción del recorrido

@@ -1,8 +1,8 @@
 # Diseño del experimento — Clase 5
 
 ## Evidencia de partida
-- 3 entrevistas (Martina, Franco, Camila) confirman el patrón de mezclar apps de ocio y académicas en la misma sesión de estudio.
-- Riesgo identificado: Martina ya instaló y desinstaló una app de bloqueo — señal de que una solución con fricción puede ser abandonada.
+- 3 entrevistas (E1, E2, E3) confirman el patrón de mezclar apps de ocio y académicas en la misma sesión de estudio.
+- Riesgo identificado: E1 ya instaló y desinstaló una app de bloqueo — señal de que una solución con fricción puede ser abandonada.
 - El instrumento de Clase 4 (hipótesis de comportamiento) está construido pero su piloto de 2 semanas todavía no se ejecutó con participantes reales — no aporta evidencia nueva a esta clase.
 - Hipótesis de problema, valor y factibilidad seguían sin ningún experimento corrido.
 
@@ -35,7 +35,7 @@ Sesión combinada de configuración + clasificación:
 |---|---|
 | Hipótesis | Un estudiante puede definir reglas simples y aplicarlas de forma consistente ante contenido ambiguo, sin IA. |
 | Aprendizaje | Si la fricción de configurar + la ambigüedad real rompen el supuesto de que "reglas simples alcanzan". |
-| Participantes | 5 estudiantes de primer año, perfil similar a Martina/Franco/Camila. |
+| Participantes | 5 estudiantes de primer año, perfil similar a E1/E2/E3. |
 | Acción/resultado | Tiempo y abandonos al configurar reglas; clasificación de 6 escenarios ambiguos con esas reglas. |
 | Métrica | Tiempo de configuración + % de escenarios clasificados según la clasificación esperada por el diseño del escenario. |
 | Criterio de éxito | Configura sin abandonar en menos de 5 min, y clasifica correctamente al menos 4 de 6. |

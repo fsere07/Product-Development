@@ -380,7 +380,7 @@ Guion de 9 preguntas, revisado para evitar sugerir respuestas, no presentar solu
 | Evidencia que se recopilará | Transcripción o notas de cada entrevista + frecuencia mencionada + consecuencias mencionadas |
 | Fecha límite | Antes de la Clase 3 |
 
-> Nota: esta tabla quedó parcialmente resuelta por la propia evidencia del proyecto — el [lean-product-canvas.md](lean-product-canvas.md) ya registra las 3 entrevistas reales (Martina, Franco, Camila) que este plan buscaba producir. Los campos de "responsable" siguen sin definir porque son una decisión interna del equipo que no se puede inferir del resto del repositorio.
+> Nota: esta tabla quedó parcialmente resuelta por la propia evidencia del proyecto — el [lean-product-canvas.md](lean-product-canvas.md) ya registra las 3 entrevistas reales (E1, E2, E3) que este plan buscaba producir. Los campos de "responsable" siguen sin definir porque son una decisión interna del equipo que no se puede inferir del resto del repositorio.
 
 ---
 

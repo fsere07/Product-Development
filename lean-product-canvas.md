@@ -6,7 +6,7 @@
 
 Los estudiantes de primer año procrastinan tareas académicas por uso de redes sociales (evidenciado en 3 entrevistas: 1.5 a 2+ horas diarias, estudio nocturno, culpa recurrente), lo que **(Supuesto)** podría traducirse para la universidad en menor rendimiento académico y mayor riesgo de abandono en el primer año. Todavía necesitamos comprobar si la universidad ya mide o le preocupa esta relación.
 
-**Evidencia:** entrevistas a Martina (19, Psicología 2°año), Franco (20, Ingeniería 1°año) y Camila (18, Comunicación 1°año).
+**Evidencia:** 3 entrevistas a estudiantes universitarios (E1, E2 y E3, anonimizadas; ver [entrevistas.md](entrevistas.md)).
 
 **Supuesto pendiente de validar:** vínculo real entre esta procrastinación y métricas institucionales (notas, deserción).
 
@@ -18,7 +18,7 @@ Aumentar el tiempo promedio de estudio sin interrupciones por redes sociales, de
 
 | Rol | Respuesta | Estado |
 |---|---|---|
-| Usuario | Estudiantes de primer año (perfil similar a Martina, Franco y Camila) | Evidencia (entrevistas) |
+| Usuario | Estudiantes de primer año (perfil similar a E1, E2 y E3) | Evidencia (entrevistas) |
 | Cliente | La universidad | Definido por el equipo |
 | Decisor | Área de bienestar estudiantil / secretaría académica de la universidad | Supuesto — no validado |
 | Influenciador | Docentes de materias con alta tasa de procrastinación y/o centro de estudiantes | Supuesto |
@@ -42,7 +42,7 @@ Alternativas consideradas:
 - Valor para el usuario: menos interrupciones sin perder acceso a lo académico.
 - Tecnología central: clasificación de contenido/apps en tiempo real (inicialmente por reglas simples, no IA compleja).
 - Datos necesarios: qué apps/contenidos son "ocio" vs "académico" para cada usuario.
-- Riesgo principal: clasificación mal calibrada puede generar la misma ansiedad que llevó a Martina a desinstalar su app de bloqueo.
+- Riesgo principal: clasificación mal calibrada puede generar la misma ansiedad que llevó a E1 a desinstalar su app de bloqueo.
 - Prototipo inicial: Wizard of Oz — el estudiante define manualmente qué apps bloquear por bloque, sin IA real todavía.
 - Dependencias: ninguna física; depende de permisos de accesibilidad del sistema operativo para bloquear apps (a validar en Caja 8/factibilidad).
 - Estado: idea no validada.
@@ -67,7 +67,7 @@ Lo sabremos si un prototipo Wizard of Oz funciona sin fricción para al menos 5 
 
 ## 7. Lo más importante por aprender
 
-¿Los estudiantes realmente van a activar y sostener el uso de un "modo estudio" de forma voluntaria, o va a pasar lo mismo que con la app que instaló y desinstaló Martina?
+¿Los estudiantes realmente van a activar y sostener el uso de un "modo estudio" de forma voluntaria, o va a pasar lo mismo que con la app que instaló y desinstaló E1?
 
 *Se priorizó la hipótesis de comportamiento: mayor incertidumbre (ya hay evidencia de que soluciones similares fracasaron) y mayor impacto (si nadie la usa, no importa cuán bien funcione la tecnología).*
 
